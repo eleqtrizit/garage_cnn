@@ -1,7 +1,7 @@
 import torch
 
 from common import ModelClass, center_crop, standard_processing, transform
-from constants import MODEL_PATH, classes
+from constants import MODEL_PATH
 
 
 def infer(image_name: str):
@@ -15,7 +15,7 @@ def infer(image_name: str):
     image_tensor = image_tensor.unsqueeze_(0)
     output = model(image_tensor)
     index = output.data.cpu().numpy().argmax()
-    print(classes[index])
+
     return index
 
 
