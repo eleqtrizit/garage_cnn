@@ -1,7 +1,7 @@
 from constants import classes
 from classify_latest import classify
 from pathlib import Path
-from datetime import time
+from time import time
 CHANGE_FILE = '/tmp/changes_in_garage'
 
 

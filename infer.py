@@ -1,3 +1,5 @@
+import os
+
 import torch
 
 from common import ModelClass, center_crop, standard_processing, transform
@@ -5,8 +7,9 @@ from constants import MODEL_PATH
 
 
 def infer(image_name: str):
+    model_path = os.getenv('MODEL_PATH') or MODEL_PATH
     model = ModelClass()
-    model.load_state_dict(torch.load(MODEL_PATH))
+    model.load_state_dict(torch.load(model_path))
     model.eval()
 
     image = standard_processing(image_name)
