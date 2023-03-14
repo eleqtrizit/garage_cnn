@@ -15,18 +15,18 @@ I have two vehicles in the garage.  Therefore, there are 4 vehicle states:
 Plus, each of those states has two more states, whether the garage door is open or closed.  This brings the total to 8 states (or classes).
 
 ## Categorizing Images for Training
-I had the security camera take a picture every minute in the garage for a week.  Then, I sorted them with the script 'categorize.py'.  I goes minute by minute, using the library skimage.metrics.structural_similarity to compare the last two images.  
+I had the security camera take a picture every minute in the garage for a week.  Then, I sorted them with the script 'categorize.py'.  The script goes minute by minute, using the library skimage.metrics.structural_similarity to compare the two most recent images.  
 
 If there is a small difference between the two images, it continues and gathers all images it passes into an array.  
 
-Once it detects a big change (car or garage moved), it prompts me to categorize the gather images and moves them to a folder for PyTorch's later use.
+Once it detects a big change (car or garage moved), it prompts me to categorize the gathered images and moves them to a folder for PyTorch's later use.
 
 ## Training
 ### Preprocessing
 In order to make the model resilient, all images are a preprocessed.  The garage windows are cropped out of the top of the image. The date and time are cropped out the bottom of the image (from the security camera), and each image is resized and grayscaled.
 
 ### Sample Size
-I have far more photos of both vehicles in the garage with the door closed than I do any other state.  To compensate, I made sure to take an even number of samples from each dataset.  I randomly pick an image, then apply random center cropping and rotation, and feed that to PyTorch.
+I have far more photos of both vehicles in the garage with the door closed than I do any other state.  To compensate, I made sure to take an even number of samples from each dataset.  I randomly pick an image, then apply random center-cropping and rotation, and feed that to PyTorch.
 
 ### Building the Model
 The model is very simple. Please see ModelClass in common.py. 
