@@ -5,8 +5,8 @@ from platform import platform
 
 import cv2
 
-from common import (center_crop, center_crop_x, center_crop_y, directories,
-                    rotate_image, standard_processing)
+from common import center_crop, rotate_image, standard_processing
+from constants import center_crop_x, center_crop_y, directories
 
 SAMPLE_FACTOR = 250
 sorted_base_dir = Path('P:/sorted/')

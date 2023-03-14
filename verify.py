@@ -1,8 +1,8 @@
 import torch
 from torchvision import datasets
 
-from common import (BATCH_SIZE, DIRECTORY, MODEL_PATH, NUM_WORKERS, ModelClass,
-                    transform)
+from common import ModelClass, transform
+from constants import BATCH_SIZE, DIRECTORY, MODEL_PATH, NUM_WORKERS
 
 
 def verify(model=None):

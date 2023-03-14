@@ -9,33 +9,8 @@ import torch.nn.functional as F
 import torchvision.transforms as transforms
 from skimage.metrics import structural_similarity
 
-BATCH_SIZE = 64
-NUM_WORKERS = 10
-DIRECTORY = '/mnt/p/processed/'
-MODEL_PATH = './model.pth'
-
-TOP_CROP_ORIGINAL = 460
-BOT_CROP_ORIGINAL = 90
-CENTER_CROP_ORIGINAL_X = 200
-CENTER_CROP_ORIGINAL_Y = 200
-FX = 0.1
-FY = 0.1
-top_crop = int(TOP_CROP_ORIGINAL * FY)
-bot_crop = int(BOT_CROP_ORIGINAL * FY)
-center_crop_x = int(CENTER_CROP_ORIGINAL_X * FX)
-center_crop_y = int(CENTER_CROP_ORIGINAL_Y * FY)
-
-directories = [
-    'both_closed',
-    'both_open',
-    'honda_closed',
-    'honda_open',
-    'none_closed',
-    'none_open',
-    'truck_closed',
-    'truck_open'
-]
-classes = directories
+from constants import (FX, FY, bot_crop, center_crop_x, center_crop_y, classes,
+                       top_crop)
 
 transform = transforms.Compose(
     [transforms.ToTensor(),
@@ -95,8 +70,8 @@ def get_score(img1: np.ndarray, img2: np.ndarray) -> float:
 def process_image(file: Path) -> np.ndarray:
     """
     This function takes a file path and returns a processed image. This function
-    is used to process images in the dataset. The function reads the image, 
-    resizes it, converts it to grayscale, and crops it. 
+    is used to process images in the dataset. The function reads the image,
+    resizes it, converts it to grayscale, and crops it.
     """
     image = cv2.imread(str(file))
     image = cv2.resize(image, (0, 0), fx=FX, fy=FY)

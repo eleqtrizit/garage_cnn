@@ -3,8 +3,8 @@ import torch.nn as nn
 import torch.optim as optim
 from torchvision import datasets
 
-from common import (BATCH_SIZE, DIRECTORY, MODEL_PATH, NUM_WORKERS, ModelClass,
-                    transform)
+from common import ModelClass, transform
+from constants import BATCH_SIZE, DIRECTORY, MODEL_PATH, NUM_WORKERS
 from verify import verify
 
 # https://towardsdatascience.com/conv2d-to-finally-understand-what-happens-in-the-forward-pass-1bbaafb0b148

@@ -1,7 +1,7 @@
 import torch
 
-from common import (MODEL_PATH, ModelClass, center_crop, classes,
-                    standard_processing, transform)
+from common import ModelClass, center_crop, standard_processing, transform
+from constants import MODEL_PATH, classes
 
 
 def infer(image_name: str):
