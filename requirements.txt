@@ -1,0 +1,37 @@
+autopep8 @ file:///home/conda/feedstock_root/build_artifacts/autopep8_1677845287175/work
+certifi==2022.12.7
+charset-normalizer==3.1.0
+contourpy==1.0.7
+cycler==0.11.0
+flake8 @ file:///home/conda/feedstock_root/build_artifacts/flake8_1669396691980/work
+fonttools==4.39.0
+idna==3.4
+imageio==2.26.0
+kiwisolver==1.4.4
+lazy_loader==0.1
+matplotlib==3.7.1
+mccabe @ file:///home/conda/feedstock_root/build_artifacts/mccabe_1643049622439/work
+networkx==3.0
+numpy==1.24.2
+nvidia-cublas-cu11==11.10.3.66
+nvidia-cuda-nvrtc-cu11==11.7.99
+nvidia-cuda-runtime-cu11==11.7.99
+nvidia-cudnn-cu11==8.5.0.96
+opencv-python==4.7.0.72
+packaging==23.0
+Pillow==9.4.0
+pycodestyle @ file:///home/conda/feedstock_root/build_artifacts/pycodestyle_1669306857274/work
+pyflakes @ file:///home/conda/feedstock_root/build_artifacts/pyflakes_1669319921641/work
+pyparsing==3.0.9
+python-dateutil==2.8.2
+PyWavelets==1.4.1
+requests==2.28.2
+scikit-image==0.20.0
+scipy==1.10.1
+six==1.16.0
+tifffile==2023.2.28
+tomli @ file:///home/conda/feedstock_root/build_artifacts/tomli_1644342247877/work
+torch==1.13.1
+torchvision==0.14.1
+typing_extensions==4.5.0
+urllib3==1.26.15
