@@ -1,3 +1,4 @@
+import concurrent.futures
 import itertools
 import random
 from pathlib import Path
@@ -47,21 +48,30 @@ def process(sort_dir, train_dir, test_path, max_samples):
     center_cropper = CenterCrop()
     files = sort_path.glob('*.jpg')
     file_sampler = FileSampler(list(files))
+    executor = concurrent.futures.ThreadPoolExecutor(max_workers=32)
 
     for i in range(max_samples):
-        img = standard_processing(file_sampler())
+        executor.submit(do_transforms, test_path, train_path, rotator, center_cropper, file_sampler, i)
+        # do_transforms(test_path, train_path, rotator, center_cropper, file_sampler, i)
 
-        img = rotator(img)
-        img = center_cropper(img)
+    # wait for all threads to finish
+    executor.shutdown(wait=True)
 
-        if i % 10 != 0:
-            file_name = str(train_path / f"{random.randint(0, 100000000)}.jpg")
-        else:
-            file_name = str(test_path / f"{random.randint(0, 100000000)}.jpg")
-        print(file_name)
-        cv2.imwrite(file_name, img)
-        # cv2.imshow('image', img)
-        # cv2.waitKey(0)
+
+def do_transforms(test_path, train_path, rotator, center_cropper, file_sampler, i):
+    img = standard_processing(file_sampler())
+
+    img = rotator(img)
+    img = center_cropper(img)
+
+    if i % 10 != 0:
+        file_name = str(train_path / f"{random.randint(0, 100000000)}.jpg")
+    else:
+        file_name = str(test_path / f"{random.randint(0, 100000000)}.jpg")
+    print(file_name)
+    cv2.imwrite(file_name, img)
+    # cv2.imshow('image', img)
+    # cv2.waitKey(0)
 
 
 def main():
