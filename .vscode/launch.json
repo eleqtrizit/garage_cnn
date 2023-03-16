@@ -21,6 +21,17 @@
             "justMyCode": true
         },
         {
+            "name": "Infer Latest",
+            "type": "python",
+            "request": "launch",
+            "program": "infer.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "/mnt/p/Jpegs/"
+            ]
+        },
+        {
             "name": "Categorize",
             "type": "python",
             "request": "launch",

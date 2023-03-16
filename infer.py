@@ -1,9 +1,11 @@
 import os
+import sys
+from pathlib import Path
 
 import torch
 
 from common import ModelClass, center_crop, standard_processing, transform
-from constants import MODEL_PATH
+from constants import MODEL_PATH, classes
 
 
 def infer(image_name: str):
@@ -23,5 +25,8 @@ def infer(image_name: str):
 
 
 if __name__ == '__main__':
-    image_names = 'image.jpg'
-    infer(image_names)
+    directory = Path(sys.argv[1])
+    # get the last image in the directory
+    image = sorted(directory.glob('*.jpg'))[-1]
+    class_index = infer(str(image))
+    print(classes[class_index])
