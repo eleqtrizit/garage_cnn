@@ -11,6 +11,22 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true
+        },
+        {
+            "name": "Categorize",
+            "type": "python",
+            "request": "launch",
+            "program": "categorize.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Process Images",
+            "type": "python",
+            "request": "launch",
+            "program": "process_images.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
         }
     ]
 }
