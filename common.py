@@ -9,8 +9,7 @@ import torch.nn.functional as F
 import torchvision.transforms as transforms
 from skimage.metrics import structural_similarity
 
-from constants import (FX, FY, bot_crop, center_crop_x, center_crop_y, classes,
-                       top_crop)
+from constants import FX, FY, bot_crop, center_crop_x, center_crop_y, classes
 
 transform = transforms.Compose(
     [transforms.ToTensor(),
@@ -77,32 +76,35 @@ def process_image(file: Path) -> np.ndarray:
     resizes it, converts it to grayscale, and crops it.
     """
     image = cv2.imread(str(file))
+    collage_image = cv2.resize(image, (0, 0), fx=0.1, fy=0.1)
+    collage_image = cv2.cvtColor(collage_image, cv2.COLOR_BGR2GRAY)
     image = cv2.resize(image, (0, 0), fx=FX, fy=FY)
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    return image[:-bot_crop, :], image
+    return image[:-bot_crop, :], collage_image
 
 
-def find_nearest_sqrt(number: int) -> int:
+def find_nearest_square(number: int) -> int:
     """Return the smallest square number greater than or equal to the given number."""
     while math.ceil(math.sqrt(number)) != math.floor(math.sqrt(number)):
         number += 1
     return number
 
 
+def gallery(array):
+    nindex, height, width = array.shape
+    square = find_nearest_square(nindex)
+    sqrt = int(math.sqrt(square))
+
+    grid = np.zeros((square, height, width), dtype='uint8')
+    grid[:nindex, :, :] = array
+
+    return (grid.reshape(sqrt, sqrt, height, width)
+            .swapaxes(1, 2)
+            .reshape(height * sqrt, width * sqrt))
+
+
 def create_collage(images: np.ndarray) -> np.ndarray:
-    # Create a collage from a list of images.
-    # The function will try to make a square collage, with as many images as possible.
-    # The images are expected to be numpy arrays of shape (H, W, 3).
-    collage_size = find_nearest_sqrt(len(images))
-    images.extend([np.zeros_like(images[0])] * (collage_size ** 2 - len(images)))
-    images_horizontal = []
-    horizontals = []
-    for _ in range(collage_size):
-        if images:
-            images_horizontal.extend(images.pop() for _ in range(collage_size))
-            horizontals.append(np.hstack(images_horizontal) if images_horizontal else [])
-            images_horizontal = []
-    return np.vstack(horizontals)
+    return gallery(np.array(np.asarray(images)))
 
 
 def show_collage(collage_images: np.ndarray, waitkey: int = 1) -> None:
@@ -125,7 +127,7 @@ def standard_processing(image: np.ndarray) -> np.ndarray:
     # turn image black and white
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     # crop out the top and bottom (windows/sky + time/date)
-    return img[top_crop:-bot_crop, :]
+    return img[:-bot_crop, :]
 
 
 def rotate_image(image: np.ndarray, angle: int) -> np.ndarray:

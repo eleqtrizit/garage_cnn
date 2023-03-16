@@ -1,9 +1,12 @@
 
-import platform
 from pathlib import Path
+from platform import platform
 
-from common import (MAX_IMAGES, get_score, process_image, show_collage,
-                    sort_directories)
+from common import get_score, process_image, show_collage
+from constants import MAX_IMAGES, sort_directories
+
+MAJOR_CHANGE_SCORE = 0.67
+COLLAGE_SCORE_THRESHOLD = 0.8
 
 
 def process_input(images_to_move: list, response: str) -> None:
@@ -50,17 +53,17 @@ def main(dir: str) -> None:
         score = get_score(img1, img2)
         print("Image matching score between the two images:", score)
 
-        if score < 0.78 or len(collage_images) == MAX_IMAGES:
-            print("Major change detected" if score < 0.77 else "MAX_IMAGES images reached")
+        if score < MAJOR_CHANGE_SCORE or len(collage_images) == MAX_IMAGES:
+            print("Major change detected" if score < MAJOR_CHANGE_SCORE else "MAX_IMAGES images reached")
             show_collage(collage_images)
-            process_input(images_to_move,  get_input())
+            process_input(images_to_move, get_input())
             images_to_move = [file]
             collage_images = [collage_image2]
         else:
             images_to_move.append(file)
 
             # add only slightly questionable photos to the collage, but keep at least two images
-            if score < 0.87 or len(collage_images) < 2:
+            if score < COLLAGE_SCORE_THRESHOLD or len(collage_images) < 2:
                 collage_images.append(collage_image2)
             else:
                 # replace the last image in the collage with the current image
@@ -70,7 +73,6 @@ def main(dir: str) -> None:
 
 if __name__ == '__main__':
     if 'Windows' in platform():
-        main()
+        main('P:/Jpegs/')
     else:
         print('This script is only for Windows')
-    main('P:/Jpegs/')
