@@ -13,6 +13,14 @@
             "justMyCode": true
         },
         {
+            "name": "Train",
+            "type": "python",
+            "request": "launch",
+            "program": "train.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
             "name": "Categorize",
             "type": "python",
             "request": "launch",

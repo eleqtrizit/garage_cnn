@@ -60,8 +60,8 @@ def process(sort_dir, train_dir, test_path, max_samples):
             file_name = str(test_path / f"{random.randint(0, 100000000)}.jpg")
         print(file_name)
         cv2.imwrite(file_name, img)
-        cv2.imshow('image', img)
-        cv2.waitKey(0)
+        # cv2.imshow('image', img)
+        # cv2.waitKey(0)
 
 
 def main():
