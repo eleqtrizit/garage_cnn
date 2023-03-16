@@ -26,8 +26,11 @@ class ModelClass(nn.Module):
         self.conv1 = nn.Conv2d(1, 1, kernel_size=(5, 5))
         self.pool = nn.MaxPool2d(3, 3)
         self.conv2 = nn.Conv2d(1, 1, kernel_size=(5, 5))
-        self.fc1 = nn.Linear(1005, 120)
-        self.fc2 = nn.Linear(120, 84)
+
+        # tensor shape at this stage os batch_sizex8768
+        # 8768 is the number of features in the output of the last convolutional layer
+        self.fc1 = nn.Linear(8768, 2192)
+        self.fc2 = nn.Linear(2192, 84)
         self.fc3 = nn.Linear(84, len(classes))
 
     def forward(self, x):

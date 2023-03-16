@@ -1,7 +1,8 @@
 from pathlib import Path
+from platform import platform
 
 BATCH_SIZE = 64
-NUM_WORKERS = 10
+NUM_WORKERS = 16
 DIRECTORY = '/mnt/p/processed/'
 MODEL_PATH = './model.pth'
 MAX_IMAGES = 75
@@ -28,11 +29,12 @@ directories = [
 ]
 classes = directories
 
-sorted_base_dir = Path('P:/sorted/')
-processed_base_dir = Path('P:/processed/')
-sorted_base_dir.mkdir(exist_ok=True)
-sort_directories = [sorted_base_dir / directory for directory in directories]
-train_directories = [processed_base_dir / "train" / f"{directory}" for directory in directories]
-test_directories = [processed_base_dir / "test" / f"{directory}"for directory in directories]
-sorted_base_dir = Path('P:/sorted/')
-sorted_base_dir.mkdir(exist_ok=True)
+if 'Windows' in platform():
+    sorted_base_dir = Path('P:/sorted/')
+    processed_base_dir = Path('P:/processed/')
+    sorted_base_dir.mkdir(exist_ok=True)
+    sort_directories = [sorted_base_dir / directory for directory in directories]
+    train_directories = [processed_base_dir / "train" / f"{directory}" for directory in directories]
+    test_directories = [processed_base_dir / "test" / f"{directory}"for directory in directories]
+    sorted_base_dir = Path('P:/sorted/')
+    sorted_base_dir.mkdir(exist_ok=True)
