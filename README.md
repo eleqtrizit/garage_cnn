@@ -31,5 +31,5 @@ I have far more photos of both vehicles in the garage with the door closed than 
 ### Building the Model
 The model is very simple. Please see ModelClass in common.py. 
 
-## Notes
-I have a line of code to use the GPU, but it trained fast enough on my machine I did not use it.  It's declared, but unused.
+### GPU
+If an Nvidia GPU is available with Cuda installed, Pytorch will switch to that device for training.  Else, it will default to CPU.
