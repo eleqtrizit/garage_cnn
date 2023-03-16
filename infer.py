@@ -11,7 +11,7 @@ from constants import MODEL_PATH, classes
 def infer(image_name: str):
     model_path = os.getenv('MODEL_PATH') or MODEL_PATH
     model = ModelClass()
-    model.load_state_dict(torch.load(model_path))
+    model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
     model.eval()
 
     image = standard_processing(image_name)
