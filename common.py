@@ -21,6 +21,9 @@ transform = transforms.Compose(
 class ModelClass(nn.Module):
     def __init__(self):
         super().__init__()
+        # 1,1 = input channels, output channels
+        # input channels = 1 because the images are grayscale
+        # output channels = 1 because we only want one output (also grayscale)
         self.conv1 = nn.Conv2d(1, 1, kernel_size=(5, 5))
         self.pool = nn.MaxPool2d(3, 3)
         self.conv2 = nn.Conv2d(1, 1, kernel_size=(5, 5))
@@ -76,7 +79,7 @@ def process_image(file: Path) -> np.ndarray:
     image = cv2.imread(str(file))
     image = cv2.resize(image, (0, 0), fx=FX, fy=FY)
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    return image[top_crop:-bot_crop, :], image
+    return image[:-bot_crop, :], image
 
 
 def find_nearest_sqrt(number: int) -> int:
