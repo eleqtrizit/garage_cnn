@@ -49,9 +49,10 @@ def main():
 
     print('Finished Training')
     torch.save(model.state_dict(), MODEL_PATH)
-    verify()
 
 
 if __name__ == '__main__':
     torch.multiprocessing.set_start_method('spawn')
     main()
+    print("Verifying model...")
+    verify()

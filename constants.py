@@ -3,7 +3,7 @@ from platform import platform
 
 BATCH_SIZE = 64
 NUM_WORKERS = 16
-DIRECTORY = '/mnt/p/processed/'
+DIRECTORY = 'P:/processed/'
 MODEL_PATH = './model.pth'
 MAX_IMAGES = 75
 TOP_CROP_ORIGINAL = 460
