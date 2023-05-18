@@ -18,14 +18,8 @@ center_crop_x = int(CENTER_CROP_ORIGINAL_X * FX)
 center_crop_y = int(CENTER_CROP_ORIGINAL_Y * FY)
 
 directories = [
-    'both_closed',
-    'both_open',
-    'honda_closed',
-    'honda_open',
-    'none_closed',
-    'none_open',
-    'truck_closed',
-    'truck_open'
+    'open',
+    'closed'
 ]
 classes = directories
 
