@@ -25,8 +25,6 @@ def infer(image_name: str):
 
 
 if __name__ == '__main__':
-    directory = Path(sys.argv[1])
-    # get the last image in the directory
-    image = sorted(directory.glob('*.jpg'))[-1]
-    class_index = infer(str(image))
+    image = sys.argv[1]
+    class_index = infer(image)
     print(classes[class_index])
